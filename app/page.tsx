@@ -1,11 +1,11 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { useEffect, useRef, useState } from "react";
 import { Howl } from "howler";
 import { useClerk, useUser } from "@clerk/clerk-react"; // Import Clerk hooks
 import Chat from "@/components/Chat";
 import RequestForm from "@/components/RequestForm";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +13,7 @@ export default function Home() {
   const chatCloseAudio = useRef(new Howl({ src: ["/off.mp3"] }));
   const [isLoading, setIsLoading] = useState(false);
   const [siteContent, setSiteContent] = useState({ url: "", content: "" });
-  const { user, isLoaded } = useUser(); // Get user info
+  const { user } = useUser(); // Get user info
   const { openSignIn } = useClerk(); // Clerk's method to open the sign-in page
 
   const instructions = siteContent.content?.trim()
@@ -37,7 +37,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const handleEscape = (e) => {
+    const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         chatCloseAudio.current.play();
         setIsOpen(false);
@@ -47,13 +47,13 @@ export default function Home() {
     return () => window.removeEventListener("keydown", handleEscape);
   }, []);
 
-  const chatContainerRef = useRef(null);
+  const chatContainerRef = useRef<HTMLDivElement | null>(null); // Type the ref to be a HTMLDivElement or null
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event: MouseEvent) => {
       if (
         chatContainerRef.current &&
-        !chatContainerRef.current.contains(event.target)
+        !chatContainerRef.current.contains(event.target as Node) // Explicit type assertion to Node
       ) {
         chatCloseAudio.current.play();
         setIsOpen(false);
@@ -115,7 +115,6 @@ export default function Home() {
               >
                 Close
               </button>
-              {/* Chatbot content goes here */}
             </div>
           </div>
         </div>

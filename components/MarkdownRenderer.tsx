@@ -1,7 +1,6 @@
 "use client";
 import React, { FC, memo } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { coldarkDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import ReactMarkdown, { Options } from "react-markdown";
 import remarkGfm from "remark-gfm";
