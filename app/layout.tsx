@@ -43,7 +43,7 @@ export default function RootLayout({
                 </Button>
               </SignInButton>
               <SignUpButton mode="modal">
-                <Button className=" py-2 px-4 rounded-3xl transition duration-300 ease-in-out">
+                <Button className=" py-2 px-4 rounded-xl transition duration-300 ease-in-out">
                   Sign up
                 </Button>
               </SignUpButton>

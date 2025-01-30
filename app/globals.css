@@ -16,7 +16,7 @@ body {
   background-color: black;
   background-image: url("/agent.png");
   background-size: contain;
-  background-position: center;
+  background-position: bottom;
   background-repeat: no-repeat;
   object-fit: cover;
   height: 100vh;
@@ -50,7 +50,7 @@ h1 {
 }
 
 .instructions-text {
-  font-weight: 300;
+  font-weight: 800;
   font-size: 1rem;
   margin-top: 15px;
   margin-bottom: 20px;
@@ -72,7 +72,7 @@ h1 {
 }
 
 .chat-form {
-  position: absolute;
+  position: relative;
   bottom: 0;
   left: 0;
   right: 0;
@@ -93,6 +93,7 @@ h1 {
   margin: auto;
   height: 50px;
   color: black;
+  font-size: 15px;
 }
 
 .chat-form > button {
@@ -105,24 +106,21 @@ h1 {
   padding: 10px 20px;
   height: 40px;
   border-radius: 20px;
-  font-size: 1rem;
+  font-size: 10px;
   outline: none;
   border: none;
-  box-shadow: 0 0 24px #ffeb3b;
-  background-color: #ffca00;
-  color: #fff;
+  background-color: #000;
   font-weight: 900;
   margin-left: 10px;
   cursor: pointer;
   text-transform: uppercase;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7.41' height='12' viewBox='0 0 7.41 12'%3E%3Cpath d='M10,6,8.59,7.41,13.17,12,8.59,16.59,10,18l6-6Z' transform='translate(-8.59 -6)' fill='%2314263b'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: left 16px center;
 }
 
 .send-button:hover {
-  background-color: #ffe80e;
-  box-shadow: 0 0 30px #ffe80e;
+  background-color: #000;
+  box-shadow: 0 0 10px #2dff0e;
 }
 
 .main-btn {
@@ -271,19 +269,46 @@ h1 {
   color: #0a5197;
 }
 
+.ai-chat {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
 .ai-chat .message {
   line-height: 18px;
   text-shadow: 0 0 4px #ffffff40;
-  font-family: monospace;
   font-size: 14px;
+}
+
+.user-chat {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  gap: 10px;
+  align-items: center;
+}
+
+.user-chat .message {
+  line-height: 18px;
+  text-shadow: 0 0 4px #ffffff40;
+  font-size: 14px;
+  width: fit-content;
 }
 
 .user-chat > .avatar {
   box-shadow: 0 0 14px #ffffff4f;
+  border-radius: 50%;
 }
 
 .ai-chat > .avatar {
-  box-shadow: 0 0 14px #fffac863;
+  border-radius: 50%;
 }
 
 .bold {
@@ -399,4 +424,30 @@ h1 {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Define the container with a scroll */
+.scroll-box {
+  overflow-y: scroll; /* Enable vertical scrolling */
+}
+
+/* Styling the scrollbar */
+.scroll-box::-webkit-scrollbar {
+  width: 4px; /* Width of the scrollbar */
+}
+
+/* Styling the scrollbar track (background) */
+.scroll-box::-webkit-scrollbar-track {
+  border-radius: 10px; /* Optional rounded corners */
+}
+
+/* Styling the scrollbar thumb (the draggable part) */
+.scroll-box::-webkit-scrollbar-thumb {
+  background: #888; /* Gray color for the thumb */
+  border-radius: 10px; /* Optional rounded corners */
+}
+
+/* Styling the scrollbar thumb on hover */
+.scroll-box::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Darker gray when hovering */
 }
