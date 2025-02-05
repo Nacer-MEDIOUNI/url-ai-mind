@@ -6,6 +6,7 @@ import { useClerk, useUser } from "@clerk/clerk-react"; // Import Clerk hooks
 import Chat from "@/components/Chat";
 import RequestForm from "@/components/RequestForm";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +18,7 @@ export default function Home() {
   const { openSignIn } = useClerk(); // Clerk's method to open the sign-in page
 
   const instructions = siteContent.content?.trim()
-    ? "Ask any questions you want about the site"
+    ? "Feel free to ask anything you`d like about the site"
     : "Enter the site you want to chat with";
 
   const handleChatOpen = () => {
@@ -73,14 +74,18 @@ export default function Home() {
     <main className="App">
       <div className="w-full flex flex-col items-center justify-center min-h-screen py-2">
         <div className="flex flex-col items-center justify-center">
-          <h1 className="text-6xl font-bold mt-10">
+          <h1 className="text-4xl lg:text-6xl font-bold mx-[10%] lg:mt-20">
             Interacting with websites via AI Agent
           </h1>
           <Button
             onClick={handleChatOpen}
-            className="mt-10 text-white border border-white hover:text-white py-2 px-4 rounded-xl transition duration-300 ease-in-out"
+            className="glow-button animate-pulse-[10] hover:animate-none mb-20 text-base font-bold mt-6 lg:mt-20 text-white border border-white hover:text-white py-2 px-4 rounded-xl transition duration-300 ease-in-out"
           >
             Get Started
+            <span className="relative flex size-3">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#5868AE] opacity-75"></span>
+              <span className="relative inline-flex size-3 rounded-full bg-[#5868AE]"></span>
+            </span>
           </Button>
           {/* Chatbot container */}
           <div
@@ -90,31 +95,25 @@ export default function Home() {
           >
             {/* Overlay */}
             {isOpen && (
-              <div className="fixed inset-0" onClick={handleChatClose} />
+              <div className="fixed mt-4 inset-0" onClick={handleChatClose} />
             )}
             <div
               ref={chatContainerRef}
-              className="bg-black/80 shadow-slate-100 shadow-lg w-fit h-full  flex flex-col overflow-hidden z-20 justify-center items-center"
+              className="bg-black/80 shadow-slate-100 shadow-lg w-full h-full  flex flex-col overflow-hidden z-20 justify-center items-center"
             >
-              <div className="form-wrapper">
+              <div className=" relative w-full h-full flex flex-col items-center justify-center">
                 <p className="instructions-text">{instructions}</p>
                 {siteContent.content ? (
-                  <Chat siteContent={siteContent} />
+                  <Chat closeChat={handleChatClose} siteContent={siteContent} />
                 ) : (
                   <RequestForm
                     setIsLoading={setIsLoading}
                     setSiteContent={setSiteContent}
                     isLoading={isLoading}
+                    closeChat={handleChatClose}
                   />
                 )}
               </div>
-
-              <button
-                onClick={handleChatClose}
-                className="absolute top-4 right-4 text-black hover:text-gray-700"
-              >
-                Close
-              </button>
             </div>
           </div>
         </div>

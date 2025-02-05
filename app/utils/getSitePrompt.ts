@@ -11,7 +11,7 @@ OBJECTIVE: The user gave you the text from a site. Your role is to answer to the
 ------
 SITE DATA:\n\n ${siteContent.content}
 ------
-OUTPUT FORMAT: Reply to the user questions in a concise way, less than 100 characters (unless specified otherwise).
+OUTPUT FORMAT: Reply to the user questions in a concise way, less than 100 characters (unless specified otherwise and without mentioning the total number of characters ).
 `,
     },
     { id: '1', role: 'assistant', content: `Here is the site you entered: ${siteContent.url}`

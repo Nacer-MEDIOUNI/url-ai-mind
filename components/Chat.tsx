@@ -4,6 +4,8 @@ import { useUser, useClerk } from "@clerk/nextjs";
 import { useChat } from "ai/react";
 import { getSitePrompt } from "@/app/utils/getSitePrompt";
 import MarkdownRenderer from "./MarkdownRenderer";
+import { Button } from "./ui/button";
+import { IoArrowUpCircle } from "react-icons/io5";
 
 export type SiteContent = {
   url: string;
@@ -11,9 +13,10 @@ export type SiteContent = {
 };
 type ChatProps = {
   siteContent: SiteContent;
+  closeChat: any;
 };
 
-const Chat: React.FC<ChatProps> = ({ siteContent }) => {
+const Chat: React.FC<ChatProps> = ({ closeChat, siteContent }) => {
   const chatContainer = useRef<HTMLDivElement>(null);
 
   const { messages, input, handleInputChange, handleSubmit } = useChat({
@@ -65,8 +68,8 @@ const Chat: React.FC<ChatProps> = ({ siteContent }) => {
             >
               <Image
                 className="avatar"
-                alt="avatar"
-                src={`/${m.role}.png`}
+                alt=""
+                src={`/${m.role}.webp`}
                 width={32}
                 height={32}
               />
@@ -89,18 +92,33 @@ const Chat: React.FC<ChatProps> = ({ siteContent }) => {
   return (
     <div className="chat">
       {renderResponse()}
-      <form onSubmit={onSubmit} className="chat-form">
-        <input
-          name="input-field"
-          type="text"
-          placeholder="Ask anything about the site"
-          onChange={handleInputChange}
-          value={input}
-        />
-        <button type="submit" className="send-button">
-          Send
-        </button>
+      <form
+        className="w-full flex justify-center items-center p-4 bg-black border-[1px] rounded-3xl  bg-opacity-50 backdrop-blur-xl  "
+        onSubmit={onSubmit}
+      >
+        <div className="input-group">
+          <input
+            className="inputStyle bg-neutral-900"
+            name="input-field"
+            type="text"
+            placeholder="Ask anything about the site"
+            onChange={handleInputChange}
+            value={input}
+          />
+        </div>
+
+        <div>
+          <Button className=" buttonStyle" type="submit">
+            <IoArrowUpCircle className="!w-6 !h-6 " />
+          </Button>
+        </div>
       </form>
+      <button
+        onClick={closeChat}
+        className="font-bold text-white text-center mt-2"
+      >
+        Exit <span className="font-light text-xs"> or click on Esc </span>
+      </button>
     </div>
   );
 };
