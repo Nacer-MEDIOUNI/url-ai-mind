@@ -6,7 +6,8 @@ import { useClerk, useUser } from "@clerk/clerk-react"; // Import Clerk hooks
 import Chat from "@/components/Chat";
 import RequestForm from "@/components/RequestForm";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
@@ -70,16 +71,37 @@ export default function Home() {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    gsap.to("#hero", {
+      opacity: 1,
+      y: -20,
+      duration: 1,
+      ease: "power4.out",
+    });
+
+    gsap.to("#cta", {
+      opacity: 1,
+
+      duration: 0.3,
+      ease: "",
+      delay: 0.5, // Add a delay to start the animation a bit later
+    });
+  }, []);
+
   return (
     <main className="App">
-      <div className="w-full flex flex-col items-center justify-center min-h-screen py-2">
+      <div className="w-full flex flex-col items-center justify-start mt-20  lg:justify-center lg:mt-8 min-h-screen py-2">
         <div className="flex flex-col items-center justify-center">
-          <h1 className="text-4xl lg:text-6xl font-bold mx-[10%] lg:mt-20">
+          <h1
+            id="hero"
+            className="text-4xl lg:text-6xl font-bold mx-[10%] lg:mt-20 opacity-0"
+          >
             Interacting with websites via AI Agent
           </h1>
           <Button
+            id="cta"
             onClick={handleChatOpen}
-            className="glow-button animate-pulse-[10] hover:animate-none mb-20 text-base font-bold mt-6 lg:mt-20 text-white border border-white hover:text-white py-2 px-4 rounded-xl transition duration-300 ease-in-out"
+            className="glow-button opacity-0 animate-pulse-[10] hover:animate-none  text-base font-bold mt-6 lg:mt-20 text-white border border-white hover:text-white py-2 px-4 rounded-xl transition duration-300 ease-in-out"
           >
             Get Started
             <span className="relative flex size-3">
@@ -102,7 +124,7 @@ export default function Home() {
               className="bg-black/80 shadow-slate-100 shadow-lg w-full h-full  flex flex-col overflow-hidden z-20 justify-center items-center"
             >
               <div className=" relative w-full h-full flex flex-col items-center justify-center">
-                <p className="instructions-text">{instructions}</p>
+                <p className="instructions-text !mx-4">{instructions}</p>
                 {siteContent.content ? (
                   <Chat closeChat={handleChatClose} siteContent={siteContent} />
                 ) : (
