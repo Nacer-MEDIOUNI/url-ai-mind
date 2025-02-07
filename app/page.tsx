@@ -90,7 +90,7 @@ export default function Home() {
 
   return (
     <main className="App">
-      <div className="w-full flex flex-col items-center justify-start mt-20  lg:justify-center lg:mt-8 min-h-screen py-2">
+      <div className="w-full flex flex-col items-center justify-start mt-20  lg:justify-center lg:mt-8 py-2">
         <div className="flex flex-col items-center justify-center">
           <h1
             id="hero"
